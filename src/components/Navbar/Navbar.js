@@ -4,6 +4,8 @@ import Instagram_Logo_2016 from "../../images/Instagram_Logo_2016.png";
 import { Button, Modal, Box } from "@mui/material";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { NavLink } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -13,6 +15,8 @@ function Navbar() {
     password: "",
     email: "",
   });
+
+  const token = Cookies.get("JWT_Token");
 
   const handleClose = () => {
     setOpen(false);
@@ -116,7 +120,16 @@ function Navbar() {
         />
         <div>
           <Button onClick={handleOpen}>Sign Up</Button>
-          <Button>Login</Button>
+          {!token && (
+            <NavLink to="/login">
+              <Button>Login</Button>
+            </NavLink>
+          )}
+          {token && (
+            <NavLink to="/login">
+              <Button>Logout</Button>
+            </NavLink>
+          )}
         </div>
       </div>
     </div>

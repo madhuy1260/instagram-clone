@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import InstagramEmbed from "react-instagram-embed";
 import Post from "../Post/Post";
 import ImageUploader from "../ImageUploader/ImageUploader";
+import Cookies from "js-cookie";
+import { Navigate } from "react-router-dom";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -20,6 +22,10 @@ function Home() {
     }
   };
 
+  const token = Cookies.get("JWT_Token");
+  if (token === undefined) {
+    <Navigate to="/login" />;
+  }
   useEffect(() => {
     getPostData();
   }, []);
