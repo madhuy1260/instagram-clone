@@ -1,0 +1,6 @@
+frontend:
+backend:
+used:
+	login functionality
+	react-instagram embed npm package
+	material UI 
